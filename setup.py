@@ -32,15 +32,15 @@ setup(name="setuptools-green",
       keywords="development testing",
       packages=find_packages(exclude=["tests"]),
       cmdclass={
-          "test": GreenTestCommand
+          "green": GreenTestCommand
       },
       install_requires=["setuptools", "green"],
       extras_require={
-          "test": ["testtools"]
+          "green": ["testtools"]
       },
       entry_points={
           "distutils.commands": [
-              "test=setuptools_green:GreenTestCommand",
+              "green=setuptools_green:GreenTestCommand",
           ]
       },
       zip_safe=True,

@@ -7,6 +7,8 @@
 
 import sys
 
+from distutils.errors import DistutilsArgError
+
 import green.cmdline
 
 from mock import Mock
@@ -15,7 +17,7 @@ from setuptools import Distribution
 
 from setuptools_green import GreenTestCommand
 
-from testtools import TestCase
+from testtools import ExpectedException, TestCase
 from testtools.matchers import (Contains, Not)
 
 
@@ -41,6 +43,14 @@ class TestGreenTestCommand(TestCase):
         cmd.ensure_finalized()
         cmd.run()
         self.assertThat(green.cmdline.sys.argv, Not(Contains("-vvv")))
+
+    def test_invalid_option(self):
+        """Invalidly formed options throw."""
+        with ExpectedException(DistutilsArgError):
+            cmd = GreenTestCommand(Distribution())
+            cmd.quiet = "A string"
+            cmd.ensure_finalized()
+            cmd.run()
 
     def test_run_verbose(self):
         """Run green tests verbosely."""

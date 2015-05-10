@@ -29,7 +29,7 @@ class TestGreenTestCommand(TestCase):
         """Initialize instance variables on this test case."""
         super(TestGreenTestCommand, self).__init__(*args, **kwargs)
 
-    def setUp(self):
+    def setUp(self):  # suppress(N802)
         """Patch out functions to monitor GreenTestCommand behaviour."""
         super(TestGreenTestCommand, self).setUp()
 
@@ -44,7 +44,7 @@ class TestGreenTestCommand(TestCase):
         cmd.run()
         self.assertThat(green.cmdline.sys.argv, Not(Contains("-vvv")))
 
-    def test_invalid_option(self):
+    def test_invalid_option(self):  # suppress(no-self-use)
         """Invalidly formed options throw."""
         with ExpectedException(DistutilsArgError):
             cmd = GreenTestCommand(Distribution())
@@ -57,7 +57,7 @@ class TestGreenTestCommand(TestCase):
         GreenTestCommand(Distribution()).run()
         self.assertThat(green.cmdline.sys.argv, Contains("-vvv"))
 
-    def test_use_exit_status(self):
+    def test_use_exit_status(self):  # suppress(no-self-use)
         """Use Green's exit status."""
         green.cmdline.main.return_value = 1
         GreenTestCommand(Distribution()).run()

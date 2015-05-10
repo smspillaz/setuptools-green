@@ -11,7 +11,7 @@ from setuptools import setup
 from setuptools_green import GreenTestCommand
 
 setup(name="setuptools-green",
-      version="0.0.2",
+      version="0.0.3",
       description="Provides a 'test' command for running tests with green",
       long_description_markdown_filename="README.md",
       author="Sam Spilsbury",
@@ -36,6 +36,7 @@ setup(name="setuptools-green",
       },
       install_requires=["setuptools", "green"],
       extras_require={
+          "polysquarelint": ["polysquare-setuptools-lint"],
           "green": ["testtools"],
           "upload": ["setuptools-markdown"]
       },

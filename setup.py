@@ -37,7 +37,7 @@ setup(name="setuptools-green",
       install_requires=["setuptools", "green"],
       extras_require={
           "polysquarelint": ["polysquare-setuptools-lint"],
-          "green": ["testtools"],
+          "green": ["mock", "testtools"],
           "upload": ["setuptools-markdown"]
       },
       entry_points={

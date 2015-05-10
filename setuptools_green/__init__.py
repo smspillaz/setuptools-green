@@ -6,18 +6,18 @@
 # See /LICENCE.md for Copyright information
 """Provide a setuptools command for running tests with green."""
 
+import sys
+
 from distutils.errors import DistutilsArgError
 
 import setuptools
-
-import sys
 
 
 class GreenTestCommand(setuptools.Command):
 
     """Provide a test command using green."""
 
-    def run(self):
+    def run(self):   # suppress(unused-function)
         """Run tests using green."""
         import green.cmdline
         import green.config
@@ -38,7 +38,8 @@ class GreenTestCommand(setuptools.Command):
             raise DistutilsArgError("""--quiet takes no additional """
                                     """arguments.""")
 
-    user_options = [
+    user_options = [  # suppress(unused-variable)
         ("quiet", None, "Don't show test descriptions when running")
     ]
+    # suppress(unused-variable)
     description = "run tests using the 'green' test runner"

@@ -4,5 +4,3 @@
 #
 # See /LICENCE.md for Copyright information.
 """Module loader for setuptools-green tests."""
-
-

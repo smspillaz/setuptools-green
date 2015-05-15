@@ -1,18 +1,23 @@
 language: python
-sudo: false
 python:
  - '2.7'
  - '3.4'
- - pypy
- - pypy3
+ - 'pypy'
+ - 'pypy3'
+sudo: false
+cache:
+  directories:
+    - container
 install:
- - pip install -e .[green]
- - pip install coverage coveralls
+ - eval "$(curl -LSs --connect-timeout 2 --retry 100 public-travis-scripts.polysquare.org/bootstrap.py | python /dev/stdin -d $(pwd)/container -s setup/python/setup.py -e bash -p /dev/stdout)"
 script:
- - python setup.py develop
- - coverage run --source=setuptools_green setup.py green
+ - polysquare_run check/python/check.py --coverage-exclude "*/__init__.py"
 after_success:
- - coveralls
+ - polysquare_run coverage/python/coverage.py
+before_cache:
+ - polysquare_cleanup
+before_deploy:
+ - polysquare_run deploy/python/deploy.py
 deploy:
   provider: pypi
   user:

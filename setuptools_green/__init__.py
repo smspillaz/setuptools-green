@@ -17,6 +17,11 @@ class GreenTestCommand(setuptools.Command):
 
     """Provide a test command using green."""
 
+    def __init__(self, *args, **kwargs):
+        """Initialize instance variables."""
+        setuptools.Command.__init__(self, *args, **kwargs)
+        self.quiet = False
+
     def run(self):   # suppress(unused-function)
         """Run tests using green."""
         import green.cmdline

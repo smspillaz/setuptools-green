@@ -2,5 +2,5 @@
 #
 # Module loader for setuptools-green tests.
 #
-# See /LICENCE.md for Copyright information.
+# See /LICENCE.md for Copyright information
 """Module loader for setuptools-green tests."""

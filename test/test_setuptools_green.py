@@ -5,20 +5,23 @@
 # See /LICENCE.md for Copyright information
 """Tests for setuptools-green."""
 
-import sys
+# pychecker seems to think that all these modules are being re-imported -
+# they aren't, but just suppress the errors for now.
 
-from distutils.errors import DistutilsArgError
+import sys  # suppress(PYC70)
 
-import green.cmdline
+from distutils.errors import DistutilsArgError  # suppress(PYC70)
 
-from mock import Mock
+import green.cmdline  # suppress(PYC70)
 
-from setuptools import Distribution
+from mock import Mock  # suppress(PYC70)
 
-from setuptools_green import GreenTestCommand
+from setuptools import Distribution  # suppress(PYC70)
 
-from testtools import ExpectedException, TestCase
-from testtools.matchers import (Contains, Not)
+from setuptools_green import GreenTestCommand  # suppress(PYC70)
+
+from testtools import ExpectedException, TestCase  # suppress(PYC70)
+from testtools.matchers import (Contains, Not)  # suppress(PYC70)
 
 
 class TestGreenTestCommand(TestCase):
@@ -30,7 +33,7 @@ class TestGreenTestCommand(TestCase):
         super(TestGreenTestCommand, self).__init__(*args, **kwargs)
 
     def setUp(self):  # suppress(N802)
-        """Patch out functions to monitor GreenTestCommand behaviour."""
+        """Patch out functions to monitor GreenTestCommand behavior."""
         super(TestGreenTestCommand, self).setUp()
 
         self.patch(green.cmdline, "main", Mock(spec=green.cmdline.main))

@@ -47,11 +47,28 @@ class TestGreenTestCommand(TestCase):
         cmd.run()
         self.assertThat(green.cmdline.sys.argv, Not(Contains("-vvv")))
 
-    def test_invalid_option(self):  # suppress(no-self-use)
-        """Invalidly formed options throw."""
+    def test_run_target(self):
+        """Run green tests against a predetermined target."""
+        cmd = GreenTestCommand(Distribution())
+        cmd.target = "test"
+        cmd.ensure_finalized()
+        cmd.run()
+        self.assertThat(green.cmdline.sys.argv,
+                        Contains("test"))
+
+    def test_invalid_quiet_option(self):  # suppress(no-self-use)
+        """Invalidly formed quiet option throws."""
         with ExpectedException(DistutilsArgError):
             cmd = GreenTestCommand(Distribution())
             cmd.quiet = "A string"
+            cmd.ensure_finalized()
+            cmd.run()
+
+    def test_invalid_target_option(self):  # suppress(no-self-use)
+        """Invalidly formed target option throws."""
+        with ExpectedException(DistutilsArgError):
+            cmd = GreenTestCommand(Distribution())
+            cmd.target = True
             cmd.ensure_finalized()
             cmd.run()
 

@@ -47,6 +47,15 @@ class TestGreenTestCommand(TestCase):
         cmd.run()
         self.assertThat(green.cmdline.sys.argv, Not(Contains("-vvv")))
 
+    def test_run_concurrently(self):
+        """Run green tests concurrently."""
+        cmd = GreenTestCommand(Distribution())
+        cmd.concurrent = True
+        cmd.ensure_finalized()
+        cmd.run()
+        self.assertThat(green.cmdline.sys.argv,
+                        ContainsAll(["-s", "0"]))
+
     def test_run_coverage(self):
         """Run green tests with coverage."""
         cmd = GreenTestCommand(Distribution())

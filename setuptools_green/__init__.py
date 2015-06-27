@@ -21,6 +21,7 @@ class GreenTestCommand(setuptools.Command):
         """Initialize instance variables."""
         setuptools.Command.__init__(self, *args, **kwargs)
         self.quiet = False
+        self.concurrent = False
         self.coverage = False
         self.coverage_omit = None
         self.target = None
@@ -34,6 +35,9 @@ class GreenTestCommand(setuptools.Command):
 
         if self.target:
             green.config.sys.argv.append(self.target)
+
+        if self.concurrent:
+            green.config.sys.argv.extend(["-s", "0"])
 
         if self.coverage:
             green.config.sys.argv.append("-r")
@@ -49,13 +53,14 @@ class GreenTestCommand(setuptools.Command):
     def initialize_options(self):  # suppress(unused-function)
         """Set all options to their initial values."""
         self.quiet = False
+        self.concurrent = False
         self.coverage = False
         self.coverage_omit = None
         self.target = None
 
     def finalize_options(self):  # suppress(unused-function)
         """Finalize options."""
-        for arg in ("coverage", "quiet"):
+        for arg in ("concurrent", "coverage", "quiet"):
             if not isinstance(getattr(self, arg), bool):
                 raise DistutilsArgError("""--{} takes no additional """
                                         """arguments.""".format(arg))
@@ -70,6 +75,7 @@ class GreenTestCommand(setuptools.Command):
 
     user_options = [  # suppress(unused-variable)
         ("quiet", None, """Don't show test descriptions when running"""),
+        ("concurrent", None, """Run tests concurrently"""),
         ("coverage", None, """Collect coverage"""),
         ("coverage-omit=", None, ("""Patterns to omit from coverage, """
                                   """comma separated""")),

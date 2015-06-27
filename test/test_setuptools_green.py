@@ -21,7 +21,7 @@ from setuptools import Distribution  # suppress(PYC70)
 from setuptools_green import GreenTestCommand  # suppress(PYC70)
 
 from testtools import ExpectedException, TestCase  # suppress(PYC70)
-from testtools.matchers import (Contains, Not)  # suppress(PYC70)
+from testtools.matchers import (Contains, ContainsAll, Not)  # suppress(PYC70)
 
 
 class TestGreenTestCommand(TestCase):
@@ -47,6 +47,14 @@ class TestGreenTestCommand(TestCase):
         cmd.run()
         self.assertThat(green.cmdline.sys.argv, Not(Contains("-vvv")))
 
+    def test_run_coverage(self):
+        """Run green tests with coverage."""
+        cmd = GreenTestCommand(Distribution())
+        cmd.coverage = True
+        cmd.ensure_finalized()
+        cmd.run()
+        self.assertThat(green.cmdline.sys.argv, Contains("-r"))
+
     def test_run_target(self):
         """Run green tests against a predetermined target."""
         cmd = GreenTestCommand(Distribution())
@@ -55,6 +63,18 @@ class TestGreenTestCommand(TestCase):
         cmd.run()
         self.assertThat(green.cmdline.sys.argv,
                         Contains("test"))
+
+    def test_run_coverage_omit(self):
+        """Run green tests against a predetermined target."""
+        cmd = GreenTestCommand(Distribution())
+        cmd.coverage_omit = "abc/*,*/def"
+        cmd.ensure_finalized()
+        cmd.run()
+        self.assertThat(green.cmdline.sys.argv,
+                        ContainsAll([
+                            "-o",
+                            cmd.coverage_omit
+                        ]))
 
     def test_invalid_quiet_option(self):  # suppress(no-self-use)
         """Invalidly formed quiet option throws."""

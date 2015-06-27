@@ -21,7 +21,7 @@ from setuptools import Distribution  # suppress(PYC70)
 from setuptools_green import GreenTestCommand  # suppress(PYC70)
 
 from testtools import ExpectedException, TestCase  # suppress(PYC70)
-from testtools.matchers import (Contains, Not)  # suppress(PYC70)
+from testtools.matchers import (Contains, ContainsAll, Not)  # suppress(PYC70)
 
 
 class TestGreenTestCommand(TestCase):
@@ -47,11 +47,57 @@ class TestGreenTestCommand(TestCase):
         cmd.run()
         self.assertThat(green.cmdline.sys.argv, Not(Contains("-vvv")))
 
-    def test_invalid_option(self):  # suppress(no-self-use)
-        """Invalidly formed options throw."""
+    def test_run_concurrently(self):
+        """Run green tests concurrently."""
+        cmd = GreenTestCommand(Distribution())
+        cmd.concurrent = True
+        cmd.ensure_finalized()
+        cmd.run()
+        self.assertThat(green.cmdline.sys.argv,
+                        ContainsAll(["-s", "0"]))
+
+    def test_run_coverage(self):
+        """Run green tests with coverage."""
+        cmd = GreenTestCommand(Distribution())
+        cmd.coverage = True
+        cmd.ensure_finalized()
+        cmd.run()
+        self.assertThat(green.cmdline.sys.argv, Contains("-r"))
+
+    def test_run_target(self):
+        """Run green tests against a predetermined target."""
+        cmd = GreenTestCommand(Distribution())
+        cmd.target = "test"
+        cmd.ensure_finalized()
+        cmd.run()
+        self.assertThat(green.cmdline.sys.argv,
+                        Contains("test"))
+
+    def test_run_coverage_omit(self):
+        """Run green tests against a predetermined target."""
+        cmd = GreenTestCommand(Distribution())
+        cmd.coverage_omit = "abc/*,*/def"
+        cmd.ensure_finalized()
+        cmd.run()
+        self.assertThat(green.cmdline.sys.argv,
+                        ContainsAll([
+                            "-o",
+                            cmd.coverage_omit
+                        ]))
+
+    def test_invalid_quiet_option(self):  # suppress(no-self-use)
+        """Invalidly formed quiet option throws."""
         with ExpectedException(DistutilsArgError):
             cmd = GreenTestCommand(Distribution())
             cmd.quiet = "A string"
+            cmd.ensure_finalized()
+            cmd.run()
+
+    def test_invalid_target_option(self):  # suppress(no-self-use)
+        """Invalidly formed target option throws."""
+        with ExpectedException(DistutilsArgError):
+            cmd = GreenTestCommand(Distribution())
+            cmd.target = True
             cmd.ensure_finalized()
             cmd.run()
 

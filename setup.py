@@ -11,7 +11,7 @@ from setuptools import setup
 from setuptools_green import GreenTestCommand
 
 setup(name="setuptools-green",
-      version="0.0.4",
+      version="0.0.7",
       description="Provides a 'test' command for running tests with green",
       long_description_markdown_filename="README.md",
       author="Sam Spilsbury",

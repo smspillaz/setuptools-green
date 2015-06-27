@@ -61,7 +61,7 @@ class GreenTestCommand(setuptools.Command):
     def finalize_options(self):  # suppress(unused-function)
         """Finalize options."""
         for arg in ("concurrent", "coverage", "quiet"):
-            if not isinstance(getattr(self, arg), bool):
+            if not isinstance(getattr(self, arg), int):
                 raise DistutilsArgError("""--{} takes no additional """
                                         """arguments.""".format(arg))
 

@@ -6,6 +6,8 @@
 # See /LICENCE.md for Copyright information
 """Provide a setuptools command for running tests with green."""
 
+import subprocess
+
 import sys
 
 from distutils.errors import DistutilsArgError
@@ -28,27 +30,24 @@ class GreenTestCommand(setuptools.Command):
 
     def run(self):   # suppress(unused-function)
         """Run tests using green."""
-        import green.cmdline
-        import green.config
-
-        green.config.sys.argv = ["", "-t"]
+        argv = ["green", "-t"]
 
         if self.target:
-            green.config.sys.argv.append(self.target)
+            argv.append(self.target)
 
         if self.concurrent:
-            green.config.sys.argv.extend(["-s", "0"])
+            argv.extend(["-s", "0"])
 
         if self.coverage:
-            green.config.sys.argv.append("-r")
+            argv.append("-r")
 
         if self.coverage_omit:
-            green.config.sys.argv.extend(["-o", self.coverage_omit])
+            argv.extend(["-o", self.coverage_omit])
 
         if not self.quiet:
-            green.config.sys.argv.append("-vvv")
+            argv.append("-vvv")
 
-        sys.exit(green.cmdline.main())
+        sys.exit(subprocess.call(argv))
 
     def initialize_options(self):  # suppress(unused-function)
         """Set all options to their initial values."""

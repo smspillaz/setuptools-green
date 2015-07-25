@@ -6,10 +6,11 @@ environment:
 cache:
  - C:\container
  - C:\Python27
+ - C:\Python34
 
 install:
  - ps: $env:PATH="${env:PYTHON};${env:PYTHON}/Scripts;${env:PATH};C:/MinGW/bin"
- - ps: $env:POLYSQUARE_PREINSTALLED_PYTHON="C:/Python27"
+ - ps: $env:POLYSQUARE_PREINSTALLED_PYTHON="${env:PYTHON}"
  - ps: wget public-travis-scripts.polysquare.org/bootstrap.py -OutFile bootstrap
  - ps: python bootstrap -d C:/container -s setup/python/setup.py -e powershell -p test-env.ps1 --no-mdl
  - ps: . ./test-env

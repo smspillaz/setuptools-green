@@ -8,10 +8,16 @@
 from setuptools import find_packages
 from setuptools import setup
 
-from setuptools_green import GreenTestCommand
+try:
+    from setuptools_green import GreenTestCommand
+    _CMD_CLASSES = {
+        "green": GreenTestCommand
+    }
+except ImportError:
+    _CMD_CLASSES = dict()
 
 setup(name="setuptools-green",
-      version="0.0.10",
+      version="0.0.11",
       description="Provides a 'test' command for running tests with green",
       long_description_markdown_filename="README.md",
       author="Sam Spilsbury",
@@ -31,9 +37,7 @@ setup(name="setuptools-green",
       license="MIT",
       keywords="development testing",
       packages=find_packages(exclude=["tests"]),
-      cmdclass={
-          "green": GreenTestCommand
-      },
+      cmdclass=_CMD_CLASSES,
       install_requires=["setuptools", "green>=2.0.0"],
       extras_require={
           "polysquarelint": ["polysquare-setuptools-lint"],

@@ -27,3 +27,7 @@ deploy:
   on:
     repo: polysquare/setuptools-green
     branch: master
+    python: 2.7
+env:
+  global:
+    secure: U5XW91ycbRgqtPdYTQ/hyto1dU3bv5mXj4V5rsxX4AF8ij0FnxzHuQllmRBmGDjTNISC4Pv0Cc5FhabSCGFj0Lw5hsskjhCvivCRKjliSo8MXPXQvIFpMaFImZQxE+A7s2NqjzS67NGtHRjC0YfklLVUyFybhgmwqRAiiIXnYRg=

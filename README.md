@@ -7,7 +7,7 @@ This module provides a "green" command for setuptools scripts that uses
 
 | Travis CI (Ubuntu) | AppVeyor (Windows) | Coverage | PyPI | Licence |
 |--------------------|--------------------|----------|------|---------|
-|[![Travis](https://img.shields.io/travis/polysquare/jobstamps.svg)](http://travis-ci.org/polysquare/jobstamps)|[![AppVeyor](https://img.shields.io/appveyor/ci/smspillaz/jobstamps.svg)](https://ci.appveyor.com/project/smspillaz/jobstamps)|[![Coveralls](https://img.shields.io/coveralls/polysquare/jobstamps.svg)](http://coveralls.io/polysquare/jobstamps)|[![PyPIVersion](https://img.shields.io/pypi/v/jobstamps.svg)](https://pypi.python.org/pypi/jobstamps)[![PyPIPythons](https://img.shields.io/pypi/pyversions/jobstamps.svg)](https://pypi.python.org/pypi/jobstamps)|[![License](https://img.shields.io/github/license/polysquare/jobstamps.svg)](http://github.com/polysquare/jobstamps)|
+|[![Travis](https://img.shields.io/travis/polysquare/setuptools-green.svg)](http://travis-ci.org/polysquare/setuptools-green)|[![AppVeyor](https://img.shields.io/appveyor/ci/smspillaz/setuptools-green.svg)](https://ci.appveyor.com/project/smspillaz/setuptools-green)|[![Coveralls](https://img.shields.io/coveralls/polysquare/setuptools-green.svg)](http://coveralls.io/polysquare/setuptools-green)|[![PyPIVersion](https://img.shields.io/pypi/v/setuptools-green.svg)](https://pypi.python.org/pypi/setuptools-green)[![PyPIPythons](https://img.shields.io/pypi/pyversions/setuptools-green.svg)](https://pypi.python.org/pypi/setuptools-green)|[![License](https://img.shields.io/github/license/polysquare/setuptools-green.svg)](http://github.com/polysquare/setuptools-green)|
 
 ## Usage
 

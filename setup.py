@@ -17,7 +17,7 @@ except ImportError:
     _CMD_CLASSES = dict()
 
 setup(name="setuptools-green",
-      version="0.0.13",
+      version="0.0.14",
       description="Provides a 'test' command for running tests with green",
       long_description_markdown_filename="README.md",
       author="Sam Spilsbury",

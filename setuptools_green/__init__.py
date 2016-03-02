@@ -10,13 +10,12 @@ import subprocess
 
 import sys
 
-from distutils.errors import DistutilsArgError
+from distutils.errors import DistutilsArgError  # suppress(import-error)
 
 import setuptools
 
 
 class GreenTestCommand(setuptools.Command):
-
     """Provide a test command using green."""
 
     def __init__(self, *args, **kwargs):

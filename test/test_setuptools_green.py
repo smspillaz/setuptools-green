@@ -8,7 +8,7 @@ import subprocess
 
 import sys
 
-from distutils.errors import DistutilsArgError
+from distutils.errors import DistutilsArgError  # suppress(import-error)
 
 from mock import Mock
 
@@ -26,7 +26,6 @@ def _subprocess_call_args():
 
 
 class TestGreenTestCommand(TestCase):
-
     """Test cases for the GreenTestCommand class."""
 
     def __init__(self, *args, **kwargs):

@@ -1,33 +1,34 @@
 language: python
 python:
- - '2.7'
- - '3.4'
- - 'pypy'
- - 'pypy3'
+- '2.7'
+- '3.4'
+- pypy
+- pypy3
 sudo: false
 cache:
   directories:
-    - container
+  - container
 install:
- - eval "$(curl -LSs --connect-timeout 2 --retry 100 public-travis-scripts.polysquare.org/bootstrap.py | python /dev/stdin -d $(pwd)/container -s setup/python/setup.py -e bash -p /dev/stdout)"
+- eval "$(curl -LSs --connect-timeout 2 --retry 100 public-travis-scripts.polysquare.org/bootstrap.py
+  | python /dev/stdin -d $(pwd)/container -s setup/python/setup.py -e bash -p /dev/stdout)"
 script:
- - polysquare_run check/python/check.py --coverage-exclude "*/__init__.py"
+- polysquare_run check/python/check.py --coverage-exclude "*/__init__.py"
 after_success:
- - polysquare_run coverage/python/coverage.py
+- polysquare_run coverage/python/coverage.py
 before_cache:
- - polysquare_cleanup
+- polysquare_cleanup
 before_deploy:
- - polysquare_run deploy/python/deploy.py
+- polysquare_run deploy/python/deploy.py
 deploy:
   provider: pypi
   user:
-    secure: "c2dUb+2LI+dJ1Z0JKZ3JCv+P7FzVT5v4P9zLYHsc7H14Rs+RZTtQCzKKFOqi+xOux5MZUBADkWmtHjTO7u+s+0FxeWG054yCDSeZmvmVCOQ+BiRM8y8rflS1NFPdJP+1JQ/nC+ImtM4g5yHLiRuElx0F05eJSidgb3eEbDqpU8w="
+    secure: c2dUb+2LI+dJ1Z0JKZ3JCv+P7FzVT5v4P9zLYHsc7H14Rs+RZTtQCzKKFOqi+xOux5MZUBADkWmtHjTO7u+s+0FxeWG054yCDSeZmvmVCOQ+BiRM8y8rflS1NFPdJP+1JQ/nC+ImtM4g5yHLiRuElx0F05eJSidgb3eEbDqpU8w=
   password:
-    secure: "kJkm6ZKF1dxxHhXw2Yo7E4tlrysbihkAENpTluT+sQumvQ+QUr8WrBD3bguY7GQqNI2MwvuahHNZS333+2G7DaVzEREf3H3yTyDdhgyOwinRH9gsVAgG0LrUy8YuN19+MRQkik79S8bPAi7NwLI6X94jRJaR4duKgsy4Xm0Xixo="
+    secure: kJkm6ZKF1dxxHhXw2Yo7E4tlrysbihkAENpTluT+sQumvQ+QUr8WrBD3bguY7GQqNI2MwvuahHNZS333+2G7DaVzEREf3H3yTyDdhgyOwinRH9gsVAgG0LrUy8YuN19+MRQkik79S8bPAi7NwLI6X94jRJaR4duKgsy4Xm0Xixo=
   on:
     repo: polysquare/setuptools-green
     branch: master
     python: 2.7
 env:
   global:
-    secure: U5XW91ycbRgqtPdYTQ/hyto1dU3bv5mXj4V5rsxX4AF8ij0FnxzHuQllmRBmGDjTNISC4Pv0Cc5FhabSCGFj0Lw5hsskjhCvivCRKjliSo8MXPXQvIFpMaFImZQxE+A7s2NqjzS67NGtHRjC0YfklLVUyFybhgmwqRAiiIXnYRg=
+    secure: sc1mYYcvZNauW68BiiYCYAYTQSH/w96PauS6pt1c+NwCl/HzvQ+L6IpqDFIImndRye7nonlrxcGISBoU10i5Czt7QaUtuACU7VgQ1TnXetgLiZxjqIXrbttr4EqkHKWyljBJULI6VRebN0bPQ/LHlIFhXh+Y95ZfVGJLV7+WGFw=

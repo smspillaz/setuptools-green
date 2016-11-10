@@ -6,9 +6,9 @@ matrix:
   - os: linux
     python: '3.5'
   - os: linux
-    python: 'pypy'
+    python: pypy
   - os: linux
-    python: 'pypy3'
+    python: pypy3
   - os: osx
     language: generic
     env: PYTHON=python PIP=pip
@@ -44,4 +44,4 @@ deploy:
     python: 2.7
 env:
   global:
-    secure: sc1mYYcvZNauW68BiiYCYAYTQSH/w96PauS6pt1c+NwCl/HzvQ+L6IpqDFIImndRye7nonlrxcGISBoU10i5Czt7QaUtuACU7VgQ1TnXetgLiZxjqIXrbttr4EqkHKWyljBJULI6VRebN0bPQ/LHlIFhXh+Y95ZfVGJLV7+WGFw=
+    secure: C0lQ8Gv9lBggHc97d/CdICcNL+G65JiWsBZcrCFJBuhjf1Evfa/X9t0CzsMYYziuqpWGmdUnIIOg4fAO2wcskNrRcdpU0KGxn+r7jqkgENhdnq4Kv4LjpZlcpKcnkVY2EZ+gegBj5gqvIlqjvhj48GR3Dr80KqIvPd/QpOKQbAw=
